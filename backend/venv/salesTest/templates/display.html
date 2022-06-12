@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sales Test</title>
+        
+        <link href="{% static 'style.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script type="application/javascript">
+            function viewform(id){
+                console.log("in function");
+                console.log(id);
+                
+                $.ajax({
+       
+       url:"{% url 'formdisplay' %}",
+       type:"GET",
+       dataType: 'application/json',
+      
+       data:{
+                          'id':id
+            },
+       success:function(response){
+           var user=response.user;
+           var user1=user[0];
+           console.log(user)
+           console.log(user1);
+           $result="<form><div class='form-group row'><label>First Name<input type='text' id='group_filter' value='"+user1.firstname+"'></label></div>"+
+                        "<div class='form-group row'><label>Last Name<input type='text' id='group_filter' value='"+user1.lastname+"'></label></div>"+
+                        "<div class='form-group row'><label>Email<input type='text' id='group_filter' value='"+user1.email+"'></label></div>"+
+                        "<div class='form-group row'><label>Phone Number<input type='text' id='group_filter' value='"+user1.phone+"'></label></div>"+
+                        "<div class='form-group row'><label>Company<input type='text' id='group_filter' value='"+user1.company+"'></label></div>"+
+                        "<div class='form-group row'><label>Hear About Us<input type='text' id='group_filter'value='"+user1.hear_about_us+"'></label></div>"+
+                        "<div class='form-group row'><label>Comment<input type='text' id='group_filter' value='"+user1.comment+"'></label></div>"
+                        "</form>"
+           $("#userinfo").append($result);
+           $("#groupModel").modal('show');
+           
+            },
+            async: false,
+                });
+
+            }
+        </script>
+        </head>
+    <body>
+        <h1>Sales Test</h1>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>|
+                
+                <th>Phone Number</th>
+                <th>Company</th>
+                <th>Here About Us</th>
+                <th>Comment</th>
+            </tr>
+            
+            {% for result in result %}
+            
+            <tr ondblclick="viewform({{result.0}})">
+                <td>{{ result.1 }}</td>
+                <td>{{ result.2 }}</td>
+                <td>{{ result.3 }}</td>
+                <td>{{ result.4 }}</td>
+                <td>{{ result.5 }}</td>
+                <td>{{ result.6 }}</td>
+                <td>{{ result.7}}</td>
+            </tr>
+            {% endfor %}
+
+            <div class="modal fade" id="groupModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body" id="userinfo">
+                        
+                      
+                    </div>
+                    <!-- <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+        </html>

@@ -1,0 +1,46 @@
+<html>
+    {% load static %}
+    <head>
+        <title>Contact Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">       
+        
+        <link href="{% static 'style.css' %}" rel="stylesheet">
+        
+    </head>
+    <body>
+        <div class="container">
+            <h2>Test Form</h2>
+        <form action="/test/insert/" method="POST">
+            {% csrf_token %}
+            <label for="fname">First name:</label><br>
+            <input type="text" id="fname" name="firstname"><br>
+            <label for="lname">Last name:</label><br>
+            <input type="text" id="lname" name="lastname" ><br>
+            <label for="lname">Email Address:</label><br>
+            <input type="text" id="lname" name="email" >
+            <br>
+            <label for="lname">Phone Number:</label><br>
+            <input type="text"  name="phone" >
+            <br>
+            <label for="lname">Company Name:</label><br>
+            <input type="text"  name="company" >
+            <br>
+            <label for="lname">How did you hear about us:</label><br>
+            <input type="text"  name="hear_about_us" >
+            <!-- <select id="about" name="about">
+                <option value="news">News</option>
+                <option value="social">Social</option>
+                <option value="others">Others</option>
+              </select> -->
+            <br>
+            <label for="lname">comments:</label><br>
+            <input type="text"  name="comment" >
+            <br>
+
+            <button type="submit" value="Submit">SUBMIT</button>
+          </form>
+        </div>
+
+    </body>
+</html>
+
