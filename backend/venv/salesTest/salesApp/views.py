@@ -10,7 +10,8 @@ from .forms import FormContactForm
 from django.db import connection
 from django.http import JsonResponse
 from django.core import serializers
-
+from django.urls import reverse
+from django.shortcuts import redirect
 
 
 # Create your views here.
@@ -33,7 +34,7 @@ def sales_insert(request):#insert form data into table and redirect to grid view
             connect.commit()
         finally:
             connect.close()
-    return HttpResponse("Done")
+    return redirect('/test/list/')
 
 def sales_list(request): #grid view to display all data
     try:
