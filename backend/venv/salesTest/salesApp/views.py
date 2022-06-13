@@ -52,13 +52,13 @@ def form_display(request): #ajax request to display data in modal
     id=request.GET.get('id')
     try:
         connect=connection.cursor()       
-        user=connect.execute("{call dbo.SEARCH(%s)}", (id))
+        connect.execute("{call dbo.SEARCH(%s)}", (id))
+        user=connect.fetchone()
         connect.commit()
     
-        data=json.dumps(list(user),default=str)
-        print(user)
+        
     finally:
         pass
         # connect.close()
-    return JsonResponse(data,safe=False)
+    return JsonResponse({"user":user})
 
