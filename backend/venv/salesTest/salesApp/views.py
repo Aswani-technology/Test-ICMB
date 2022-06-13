@@ -33,7 +33,7 @@ def sales_insert(request):#insert form data into table and redirect to grid view
             connect.commit()
         finally:
             connect.close()
-    return redirect(request,sales_list)
+    return HttpResponse("Done")
 
 def sales_list(request): #grid view to display all data
     try:
